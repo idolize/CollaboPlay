@@ -2,9 +2,9 @@ extends layout
 
 block content   
 	h1= title   
-	p Welcome to #{title}!   
+	p Welcome to #{title}!
+	p This is public amateur <strong>collaborative</strong> web application. 
 	- if (!user)
-		a(href="/auth/facebook") Login with Facebook
-		This is public amateur <b> collaborative </b> web application. 
+		a(href="/auth/facebook") Login with Facebook 
 	- else
 		p Hello, #{user.displayName}
