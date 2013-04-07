@@ -68,6 +68,28 @@ app.get('/users', routes.users);
 app.get('/project_list', routes.users);
 app.get('/account', ensureAuthenticated, routes.account);
 
+app.get('/new_project', ensureAuthenticated, routes.new_project);
+app.post('/new_project', ensureAuthenticated, function(req, res){
+ 	var params = {
+ 		"title": req.param("title"),
+ 		"userId": req.user.id,
+ 		"description": req.param('description')
+ 	}
+ 	addProject(params);
+ 	res.redirect('/');
+ });
+
+app.get('/browseprojects', ensureAuthenticated, function(req, res){
+	ProjectModel.find({'userId': req.user.id}, {}, {}, function(err, data){
+		res.render('test', {
+			title: 'test',
+			user: req.user,
+			testContent: 'asdfasdf',
+			list: data
+		});
+	})
+})
+
 // GET /auth/facebook
 //   Use passport.authenticate() as route middleware to authenticate the
 //   request.  The first step in Facebook authentication will involve
@@ -132,12 +154,23 @@ function ensureAuthenticated(req, res, next) {
 }
 
 function addTrack(params){
-	TrackModel;
 	var newtrack = new TrackModel(params);
 	newtrack.save(function(err, newTrack){
 		if (err){
 			console.error(err.text);
 		}
+	});
+}
+
+function addProject(params){
+	var newproject = new ProjectModel(params);
+	newproject.save(function(err, newTrack){
+		if (err){
+			console.error(err.text);
+		} else {
+			console.log("New project named '%s' is created", newTrack.title);
+		}
+
 	});
 }
 
@@ -214,15 +247,15 @@ var TrackModel = initUserTrackDatabase();
 var ProjectModel = initUserProjectDatabase();
 var TrackProjectModel = initTrackProjectDatabase()
 
-var params = {
-	title: "Pumped Up Kicks",
-	userId: 1,
-	description: "A really long string...",
-	fileLocation: "",
-}
+// var params = {
+// 	title: "Pumped Up Kicks",
+// 	userId: 1,
+// 	description: "A really long string...",
+// 	fileLocation: "",
+// }
 
 //addTrack(params);
-getTracksByUserId(1);
+//getTracksByUserId(1);
 //console.log(tracks);
 // TrackModel.find({'userId': 1}, 'title description', function(err, track){
 // 	if (err) return handleError(err);

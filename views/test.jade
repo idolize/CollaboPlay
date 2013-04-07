@@ -1,9 +1,14 @@
 extends layout
 
 block content
-	h1 Hello
-	p= testContent
+	h1 Your Projects
+	
 
-	ul
+	table
+		tr
+			th= "Title"
+			th= "Description"
 		each item in list
-			li= item.title
+			tr
+				td= item.title
+				td= item.description
