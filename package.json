@@ -12,7 +12,8 @@
 			"stylus": "*",
 			"mongoose": "*",
 			"passport": "*",
-			"passport-facebook": "*"
+			"passport-facebook": "*",
+			"mongojs": "*"
 		},
 	"engine": "node >= 0.10.3"
 }

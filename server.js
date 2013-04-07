@@ -60,6 +60,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+app.get('/project', routes.project);
 app.get('/account', ensureAuthenticated, routes.account);
 
 app.get('/login', function(req, res){

@@ -1,0 +1,16 @@
+extends layout
+
+
+
+block content   
+	if (req.query.id)
+		h1 You are on project #{req.query.id}
+	else 
+		h1 You are on project 0
+
+	numberOfTypesOfTracks = 3;
+	#original_track
+		p Here goes the original track
+	- for ( i = 0 ; i < numberOfTypesOfTracks ; i++){
+		p Here is another track
+	- }

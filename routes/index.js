@@ -1,12 +1,13 @@
 var title = 'Music App';
 
 
+
 /*
  * GET home page.
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'CollaboPlay', user: req.user });
+  res.render('index', { title: title, user: req.user });
 };
 
 
@@ -16,4 +17,12 @@ exports.index = function(req, res){
 
 exports.account = function(req, res){
 	res.render('account', { title: title, user: req.user });
+};
+
+/*
+ * GET project page.
+ */
+
+exports.project = function(req, res){
+	res.render('project', { title: title, req: req, user: req.user });
 };
