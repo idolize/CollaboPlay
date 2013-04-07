@@ -54,10 +54,26 @@ body {
   text-align: center;
   margin-top: 10px;
 }
+/*************Project List********/
+#project_list ul{
+  list-style:none;
+  display:block;
+}
+ 
+.project_row{
+  height:150px;
+}
+ 
+.project_row ul li{
+  float:left;
+  width:250px;
+}
+ 
+ 
 /************* Projects **********/
 #master_control {
   width: 500px;
-  height: 150px;
+  height: 110px;
   margin: 10px;
   border: 1px solid #222;
   margin-left: 250px;
@@ -82,7 +98,4 @@ body {
 .track_list {
   list-style: none;
   height: 350px;
-}
-.track_list li {
-  height: 150px;
 }

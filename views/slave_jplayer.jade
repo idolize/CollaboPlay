@@ -1,22 +1,23 @@
 !!! 5
 html
   head
-    link(type='text/css', href='/css/s_jplayer.css', rel='stylesheet')
-    script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js')
-    script(type='text/javascript', src='/js/jquery.jplayer.min.js')
     script(type='text/javascript')
       $(document).ready(function(){
+        //param
       $("#slave_jplayer").jPlayer({
       ready: function () {
       $(this).jPlayer("setMedia", {
+        //param
       oga: "http://upload.wikimedia.org/wikipedia/commons/f/f8/A_Hundred_Pipers.ogg"
       });
       },
       swfPath: "/js",
       supplied: "oga",
       volume: "0.8",
+      //param
       cssSelectorAncestor: "#jp_slave_container",
       cssSelector: {
+      //params
       videoPlay: "#jp-video-play_s", // *
       play: "#jp-play_s",
       pause: "#jp-pause_s",
