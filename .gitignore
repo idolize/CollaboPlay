@@ -2,3 +2,5 @@
 
 # This folder is automatically created by npm
 node_modules/
+uploads/
+*.log
