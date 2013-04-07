@@ -66,7 +66,7 @@ app.get('/account', ensureAuthenticated, routes.account);
 //	res.render('login', { user: req.user });
 //});
 
-app.get('/test', routes.test); 
+app.get('/addNewProject', routes.addNewProject); 
 
 // GET /auth/facebook
 //   Use passport.authenticate() as route middleware to authenticate the

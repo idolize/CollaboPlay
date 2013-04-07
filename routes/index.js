@@ -22,7 +22,7 @@ exports.account = function(req, res){
  * Testing new jade files
  */
 
-exports.test = function(req, res){
-    res.render('test', { title: title, user: req.user});
+exports.addNewProject = function(req, res){
+    res.render('addNewProject', { title: title, user: req.user});
 
 }; 

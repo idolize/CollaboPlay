@@ -1,7 +1,16 @@
 extends layout
 
 block content
-	p ID: #{user.id}
-	p Username: #{user.username}
-	p Name: #{user.displayName}
+    p ID: #{user.id}
+    p Username: #{user.username}
+    p Name: #{user.displayName}
+    
+    p You have the following projects:
+    - var records = [ { title: 'one', author: 'one' }, { title: 'two', author: 'two' } ];
+    ol
+    -each post in records
+        li #{post.title} was written by #{post.author}
+
+    a(href="/") Return home 
+
 
