@@ -146,7 +146,7 @@ div.jp-audio div.jp-progress {
 	height:15px;
 }
 div.jp-audio div.jp-type-single div.jp-progress {
-	left:110px;
+	left:118px;
 	width:186px;
 }
 
@@ -232,7 +232,7 @@ div.jp-audio div.jp-volume-bar {
 div.jps-audio div.jp-volume-bar {
 	margin-left:90px;
 	margin-bottom:0px;
-	top:-30px;
+	top:-53px;
 	position:relative;
 }
 div.jp-volume-bar-value {
