@@ -15,5 +15,14 @@ exports.index = function(req, res){
  */
 
 exports.account = function(req, res){
-	res.render('account', { title: title, user: req.user });
+	res.render('account', { title: title, user: req.user});
 };
+
+/*
+ * Testing new jade files
+ */
+
+exports.test = function(req, res){
+    res.render('test', { title: title, user: req.user});
+
+}; 
