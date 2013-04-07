@@ -1,0 +1,11 @@
+extends layout
+
+block content
+	h1 Submit New Project
+	form(method="post", action="/new_project")
+		p Title: 
+			input(type="text", name="title")
+		p Description: 
+			input(type="textarea", name="description")
+		br
+		input(type="submit", value="Submit")

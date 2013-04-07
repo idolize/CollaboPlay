@@ -15,8 +15,12 @@ html
           a(href="project_list") Projects
          li 
           a(href="users") Users
-         li 
-          a(href="fileupload") Upload
+         if (user)
+          li 
+           a(href="fileupload") Upload
+          li
+           a(href="new_project") New Project
+
     #content
       block content
 

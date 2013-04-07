@@ -3,7 +3,10 @@ var express = require('express')
 , http = require('http')
 , path = require('path')
 , passport = require('passport')
-, FacebookStrategy = require('passport-facebook').Strategy;
+, FacebookStrategy = require('passport-facebook').Strategy
+, mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/test');
+var db = mongoose.connection;
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -65,6 +68,28 @@ app.get('/users', routes.users);
 app.get('/project_list', routes.users);
 app.get('/account', ensureAuthenticated, routes.account);
 
+app.get('/new_project', ensureAuthenticated, routes.new_project);
+app.post('/new_project', ensureAuthenticated, function(req, res){
+ 	var params = {
+ 		"title": req.param("title"),
+ 		"userId": req.user.id,
+ 		"description": req.param('description')
+ 	}
+ 	addProject(params);
+ 	res.redirect('/');
+ });
+
+app.get('/browseprojects', ensureAuthenticated, function(req, res){
+	ProjectModel.find({'userId': req.user.id}, {}, {}, function(err, data){
+		res.render('test', {
+			title: 'test',
+			user: req.user,
+			testContent: 'asdfasdf',
+			list: data
+		});
+	})
+})
+
 // GET /auth/facebook
 //   Use passport.authenticate() as route middleware to authenticate the
 //   request.  The first step in Facebook authentication will involve
@@ -96,6 +121,22 @@ app.get('/logout', function(req, res){
 app.get('/fileupload', ensureAuthenticated, routes.fileupload);
 app.post('/upload', ensureAuthenticated, routes.upload);
 
+// app.get('/test', function(req, res, next) {
+// 	res.render('test', {
+// 		title: 'test',
+// 		testContent: 'asdfasdf',
+// 		list: [1,2,3]
+// 	});
+// });
+// app.get('/test2', function(req, res, next) {
+// 	TrackModel.find({'i'}, {}, {}, function(err, data) {
+// 		res.render('test', {
+// 			title: 'test',
+// 			testContent: 'asdfasdf',
+// 			list: data
+// 		});
+// 	})
+// });
 
 http.createServer(app).listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));
@@ -111,3 +152,114 @@ function ensureAuthenticated(req, res, next) {
 	if (req.isAuthenticated()) { return next(); }
 	res.redirect('/');
 }
+
+function addTrack(params){
+	var newtrack = new TrackModel(params);
+	newtrack.save(function(err, newTrack){
+		if (err){
+			console.error(err.text);
+		}
+	});
+}
+
+function addProject(params){
+	var newproject = new ProjectModel(params);
+	newproject.save(function(err, newTrack){
+		if (err){
+			console.error(err.text);
+		} else {
+			console.log("New project named '%s' is created", newTrack.title);
+		}
+
+	});
+}
+
+function getTracksByUserId(userId){
+	TrackModel.find({'userId': 1}, '', function(err, tracks){
+		if (err) return handleError(err);
+		console.log(tracks);
+	});
+}
+
+function initDatabase(){
+	
+	db.on('error', console.error.bind(console, 'connection error:'));
+	db.once('open', function callback () {});
+
+	//var Track = initUserTrackDatabase();
+	//var Project = initUserProjectDatabase();
+
+	// var returnObject;
+	// Track.find({'creatorId': 1}, 'title description', function(err, track){
+	// 	if (err) return handleError(err);
+	// 	console.log(track);
+	// });
+	//console.log("Title: %s \nDescription: %s", track.title, track.description);
+	//return returnObject;
+}
+
+function initUserTrackDatabase(){
+	var trackSchema;
+	trackSchema = new mongoose.Schema({
+		title:  String,
+		userId: Number,
+		description:   String,
+		fileLocation: String,
+		date: { type: Date, default: Date.now },
+	});
+	// trackSchema.methods.getTitle = function(){
+	// 	console.log("Track #" + this.creatorId + " has the Title " + this.title);
+	// }
+
+	var Track = mongoose.model('Track', trackSchema);
+	return Track;
+}
+
+function initUserProjectDatabase(){
+	var projectSchema;
+	projectSchema = new mongoose.Schema({
+		title:  String,
+		userId: Number,
+		description:   String,
+		date: { type: Date, default: Date.now },
+	});
+
+	var Project = mongoose.model('Project', projectSchema);
+	return Project;
+}
+
+function initTrackProjectDatabase(){
+	var trackProjectSchema;
+	trackProjectSchema = new mongoose.Schema({
+		trackId: Number,
+		trackTitle:  String,
+		projectId:   Number,
+		projectTitle: String,
+	});
+
+	var TrackProject = mongoose.model('TrackProject', trackProjectSchema);
+	return TrackProject;
+}
+
+
+initDatabase();
+var TrackModel = initUserTrackDatabase();
+var ProjectModel = initUserProjectDatabase();
+var TrackProjectModel = initTrackProjectDatabase()
+
+// var params = {
+// 	title: "Pumped Up Kicks",
+// 	userId: 1,
+// 	description: "A really long string...",
+// 	fileLocation: "",
+// }
+
+//addTrack(params);
+//getTracksByUserId(1);
+//console.log(tracks);
+// TrackModel.find({'userId': 1}, 'title description', function(err, track){
+// 	if (err) return handleError(err);
+// 	console.log(track);
+// });
+
+

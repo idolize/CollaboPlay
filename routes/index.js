@@ -42,6 +42,10 @@ exports.fileupload = function(req, res){
 	res.render('fileupload', { title: title, user: req.user });
 };
 
+exports.new_project = function(req, res){
+	res.render('new_project', {title:title, user: req.user })
+}
+
 /*
  * POST of uploaded file
  */
@@ -54,3 +58,17 @@ exports.fileupload = function(req, res){
  		});
  	});
  }
+
+/*
+ * POST of uploaded file
+ */
+ exports.new_projectPOST = function(req, res){
+ 	var params = {
+ 		"title": req.param("title"),
+ 		"userId": req.user.id,
+ 		"description": req.param('description')
+ 	}
+ 	addProject(params);
+ 	res.redirect('/');
+ }
+

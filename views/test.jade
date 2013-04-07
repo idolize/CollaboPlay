@@ -1,0 +1,14 @@
+extends layout
+
+block content
+	h1 Your Projects
+	
+
+	table
+		tr
+			th= "Title"
+			th= "Description"
+		each item in list
+			tr
+				td= item.title
+				td= item.description
