@@ -8,6 +8,7 @@ body {
 }
 #body_container{
   padding:20px;
+  
 
 }
 #content a {
@@ -103,10 +104,13 @@ body {
   border: 1px solid #222;
   margin-left: 250px;
   margin-bottom:30px;
+  background:#eee;
+  opacity:1;
 }
 #track_container {
   height: 500px;
   margin-top: 40px;
+  opacity:1;
 }
 #track_type_list {
   height: 250px;
