@@ -1,0 +1,80 @@
+!!! 5
+html
+  head
+    link(type='text/css', href='/css/m_jplayer.css', rel='stylesheet')
+    script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js')
+    script(type='text/javascript', src='/js/jquery.jplayer.min.js')
+    script(type='text/javascript')
+      $(document).ready(function(){
+      $("#master_jplayer").jPlayer({
+      ready: function () {
+      $(this).jPlayer("setMedia", {
+      oga: "http://upload.wikimedia.org/wikipedia/commons/f/f8/A_Hundred_Pipers.ogg"
+      });
+      },
+      swfPath: "/js",
+      supplied: "oga",
+      volume: "0.8",
+      cssSelectorAncestor: "#jp_master_container",
+      cssSelector: {
+      videoPlay: "#jp-video-play_m", // *
+      play: "#jp-play_m",
+      pause: "#jp-pause_m",
+      stop: "#jp-stop_m",
+      seekBar: "#jp-seek-bar_m",
+      playBar: "#jp-play-bar_m",
+      mute: "#jp-mute_m",
+      unmute: "#jp-unmute_m",
+      volumeBar: "#jp-volume-bar_m",
+      volumeBarValue: "#jp-volume-bar-value_m",
+      volumeMax: "#jp-volume-max_m",
+      currentTime: "#jp-current-time_m",
+      duration: "#jp-duration_m",
+      fullScreen: "#jp-full-screen_m", // *
+      restoreScreen: "#jp-restore-screen_m", // *
+      repeat: "#jp-repeat_m",
+      repeatOff: "#jp-repeat-off_m",
+      gui: "#jp-gui_m", // The interface used with autohide feature.
+      noSolution: "#jp-no-solution_m" // For error feedback when jPlayer cannot find a solution.
+      },
+      });
+      });
+  body
+    #master_jplayer.jp-jplayer
+    #jp_master_container.jp-audio
+      .jp-type-single
+        #jp-gui_m.jp-gui.jp-interface
+          ul.jp-controls
+            li
+              a#jp-play_m.jp-play(href='javascript:;', tabindex='1') play
+            li
+              a#jp-pause_m.jp-pause(href='javascript:;', tabindex='1') pause
+            li
+              a#jp-stop_m.jp-stop(href='javascript:;', tabindex='1') stop
+            li
+              a#jp-mute_m.jp-mute(href='javascript:;', tabindex='1', title='mute') mute
+            li
+              a#jp-unmute_m.jp-unmute(href='javascript:;', tabindex='1', title='unmute') unmute
+            li
+              a#jp-volume-max_m.jp-volume-max(href='javascript:;', tabindex='1', title='max volume') max volume
+          .jp-progress
+            #jp-seek-bar_m.jp-seek-bar
+              #jp-play-bar_m.jp-play-bar
+          #jp-volume-bar_m.jp-volume-bar
+            #jp-volume-bar-value_m.jp-volume-bar-value
+          .jp-time-holder
+            #jp-current-time_m.jp-current-time
+            #jp-duration_m.jp-duration
+            ul.jp-toggles
+              li
+                a#jp-repeat_m.jp-repeat(href='javascript:;', tabindex='1', title='repeat') repeat
+              li
+                a#jp-repeat-off_m.jp-repeat-off(href='javascript:;', tabindex='1', title='repeat off') repeat off
+        .jp-title
+          ul
+            li Main Control
+        .jp-no-solution
+          span Update Required
+          | To play the media you will need to either update your browser to a recent version or update your
+          a(href='http://get.adobe.com/flashplayer/', target='_blank') Flash plugin
+          | .

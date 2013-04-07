@@ -10,33 +10,33 @@ block content
 
 	#track_container
 		#master_control
-			include ./master_jplayer.html
+			include ./master_jplayer.jade
 		ul#track_type_list
 			li.track_type
 				h1 Vocals
 				ul.track_list
 					li #{req.query.vocals1}
-						include ./slave_jplayer.html
+						include ./slave_jplayer.jade
 					li #{req.query.vocals2}
-						include ./slave_jplayer.html
+						include ./slave_jplayer.jade
 			li.track_type 
 				h1 Guitar
 				ul.track_list
 					li #{req.query.guitar1}
-						include ./slave_jplayer.html
+						include ./slave_jplayer.jade
 					li #{req.query.guitar2}
-						include ./slave_jplayer.html
+						include ./slave_jplayer.jade
 			li.track_type 
 				h1 Percussion
 				ul.track_list
 					li #{req.query.percussion1}
-						include ./slave_jplayer.html
+						include ./slave_jplayer.jade
 					li #{req.query.percussion2}
-						include ./slave_jplayer.html
+						include ./slave_jplayer.jade
 			li.track_type 
 				h1 Wind
 				ul.track_list
 					li #{req.query.wind1}
-						include ./slave_jplayer.html
+						include ./slave_jplayer.jade
 					li #{req.query.wind2}
-						include ./slave_jplayer.html
+						include ./slave_jplayer.jade
