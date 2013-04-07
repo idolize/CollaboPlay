@@ -13,7 +13,8 @@
  * Skin Version: 4.2 (jPlayer 2.2.0)
  * Date: 22nd October 2012
  */
-div.jp-audio{
+div.jp-audio,
+div.jps-audio{
 
 	/* Edit the font-size to counteract inherited font sizing.
 	 * Eg. 1.25em = 1 / 0.8em
@@ -30,6 +31,7 @@ div.jpm-audio {
 }
 div.jps-audio {
 	width:220px;
+	margin-top:20px
 }
 
 div.jp-interface {
@@ -41,38 +43,15 @@ div.jp-interface {
 div.jp-audio div.jp-type-single div.jp-interface {
 	height:80px;
 }
-div.jps-audio div.jps-type-single div.jps-interface {
-	height:80px;
-}
-
-
 
 /* @group CONTROLS */
 
-div.jp-controls-holder {
-	clear: both;
-	width:440px;
-	margin:0 auto;
-	position: relative;
-	overflow:hidden;
-	top:-8px; /* This negative value depends on the size of the text in jp-currentTime and jp-duration */
-}
-
-div.jp-interface ul.jp-controls {
+div.jp-interface ul.jp-controls,
+div.jps-interface ul.jps-controls {
 	list-style-type:none;
 	margin:0;
 	padding: 0;
 	overflow:hidden;
-}
-div.jp-interface ul.jps-controls {
-	list-style-type:none;
-	margin:0;
-	padding-left: 20px;
-	overflow:hidden;
-}
-div.jp-audio ul.jps-controls {
-	width: 400px;
-	padding:20px 20px 0 20px;
 }
 
 div.jp-audio ul.jp-controls {
@@ -80,19 +59,19 @@ div.jp-audio ul.jp-controls {
 	padding:20px 20px 0 20px;
 }
 
+div.jps-audio ul.jps-controls {
+	width: 200px;
+	padding:10px 20px 20px 40px;
+}
 
-div.jp-video ul.jp-controls,
-div.jp-interface ul.jp-controls li {
+div.jp-interface ul.jp-controls li,
+div.jps-interface ul.jps-controls li {
 	display:inline;
 	float: left;
 }
 
-div.jp-interface ul.jp-controls a {
-	display:block;
-	overflow:hidden;
-	text-indent:-9999px;
-}
-div.jp-interface ul.jps-controls a {
+div.jp-interface ul.jp-controls a,
+div.jps-interface ul.jps-controls a {
 	display:block;
 	overflow:hidden;
 	text-indent:-9999px;
@@ -198,14 +177,16 @@ div.jp-audio div.jp-type-single a.jp-mute,
 div.jp-audio div.jp-type-single a.jp-unmute {
 	margin-left: 212px;	
 }
-
-div.jp-audio div.jp-type-single a#jp-mute1,
-div.jp-audio div.jp-type-single a#jp-unmute1{
-	margin-left: 210px;
+div.jps-audio div.jp-type-single a.jp-mute,
+div.jps-audio div.jp-type-single a.jp-unmute {
+	margin-left: 30px;	
 }
 
 div.jp-audio a.jp-volume-max {
 	margin-left: 56px;	
+}
+div.jps-audio a.jp-volume-max {
+	margin-left: 56px;
 }
 
 a.jp-mute {
@@ -241,6 +222,12 @@ div.jp-audio div.jp-volume-bar {
 	left:330px;
 }
 
+div.jps-audio div.jp-volume-bar {
+	margin-left:90px;
+	margin-bottom:0px;
+	top:-30px;
+	position:relative;
+}
 div.jp-volume-bar-value {
 	background: url("../images/jplayer.blue.monday.jpg") 0 -256px repeat-x;
 	width:0px;
