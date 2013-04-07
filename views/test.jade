@@ -1,0 +1,9 @@
+extends layout
+
+block content
+	h1 Hello
+	p= testContent
+
+	ul
+		each item in list
+			li= item.title

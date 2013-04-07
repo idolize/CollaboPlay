@@ -97,6 +97,22 @@ app.get('/logout', function(req, res){
 app.get('/fileupload', ensureAuthenticated, routes.fileupload);
 app.post('/upload', ensureAuthenticated, routes.upload);
 
+// app.get('/test', function(req, res, next) {
+// 	res.render('test', {
+// 		title: 'test',
+// 		testContent: 'asdfasdf',
+// 		list: [1,2,3]
+// 	});
+// });
+// app.get('/test2', function(req, res, next) {
+// 	TrackModel.find({'i'}, {}, {}, function(err, data) {
+// 		res.render('test', {
+// 			title: 'test',
+// 			testContent: 'asdfasdf',
+// 			list: data
+// 		});
+// 	})
+// });
 
 http.createServer(app).listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));
@@ -113,47 +129,38 @@ function ensureAuthenticated(req, res, next) {
 	res.redirect('/');
 }
 
+function addTrack(params){
+	TrackModel;
+	var newtrack = new TrackModel(params);
+	newtrack.save(function(err, newTrack){
+		if (err){
+			console.error(err.text);
+		}
+	});
+}
+
+function getTracksByUserId(userId){
+	TrackModel.find({'userId': 1}, '', function(err, tracks){
+		if (err) return handleError(err);
+		console.log(tracks);
+	});
+}
+
 function initDatabase(){
 	
 	db.on('error', console.error.bind(console, 'connection error:'));
 	db.once('open', function callback () {});
 
-	var Track = initUserTrackDatabase();
-	var Project = initUserProjectDatabase();
+	//var Track = initUserTrackDatabase();
+	//var Project = initUserProjectDatabase();
 
-	var params = {title: "A Day in the Life Cover", type: "guitar", creatorId: 1, description: "A Cover of the Beatles song"};
-	var newtrack = new Track(params);
-	// newtrack.save(function(err, newTrack){
-	// 	if (err){
-	// 		console.error(err.text);
-	// 	}
+	// var returnObject;
+	// Track.find({'creatorId': 1}, 'title description', function(err, track){
+	// 	if (err) return handleError(err);
+	// 	console.log(track);
 	// });
-	
-	
-
-	var returnObject;
-	Track.find({'creatorId': 1}, 'title description', function(err, track){
-		if (err) return handleError(err);
-		console.log(track);
-	});
 	//console.log("Title: %s \nDescription: %s", track.title, track.description);
-	return returnObject;
-}
-
-function getSchema(collection){
-	if (collection == "track"){
-		var trackSchema = new mongoose.Schema({
-			title:  String,
-			creatorId: Number,
-			description:   String,
-			type: String,
-			date: { type: Date, default: Date.now },
-		});
-		trackSchema.methods.getTitle = function(){
-			console.log("Track #" + this.creatorId + " has the Title " + this.title);
-		}
-		return trackSchema;
-	}
+	//return returnObject;
 }
 
 function initUserTrackDatabase(){
@@ -181,16 +188,43 @@ function initUserProjectDatabase(){
 		description:   String,
 		date: { type: Date, default: Date.now },
 	});
-	// trackSchema.methods.getTitle = function(){
-	// 	console.log("Track #" + this.creatorId + " has the Title " + this.title);
-	// }
 
 	var Project = mongoose.model('Project', projectSchema);
 	return Project;
 }
 
+function initTrackProjectDatabase(){
+	var trackProjectSchema;
+	trackProjectSchema = new mongoose.Schema({
+		trackId: Number,
+		trackTitle:  String,
+		projectId:   Number,
+		projectTitle: String,
+	});
+
+	var TrackProject = mongoose.model('TrackProject', trackProjectSchema);
+	return TrackProject;
+}
+
 
 initDatabase();
-var Track = initUserTrackDatabase();
-var Project = initUserProjectDatabase();
+var TrackModel = initUserTrackDatabase();
+var ProjectModel = initUserProjectDatabase();
+var TrackProjectModel = initTrackProjectDatabase()
+
+var params = {
+	title: "Pumped Up Kicks",
+	userId: 1,
+	description: "A really long string...",
+	fileLocation: "",
+}
+
+//addTrack(params);
+getTracksByUserId(1);
+//console.log(tracks);
+// TrackModel.find({'userId': 1}, 'title description', function(err, track){
+// 	if (err) return handleError(err);
+// 	console.log(track);
+// });
+
 
