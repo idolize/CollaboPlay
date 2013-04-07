@@ -1,0 +1,60 @@
+!!! 5
+html
+  head
+    link(type='text/css', href='/css/s_jplayer.css', rel='stylesheet')
+    script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js')
+    script(type='text/javascript', src='/js/jquery.jplayer.min.js')
+    script(type='text/javascript')
+      $(document).ready(function(){
+      $("#slave_jplayer").jPlayer({
+      ready: function () {
+      $(this).jPlayer("setMedia", {
+      oga: "http://upload.wikimedia.org/wikipedia/commons/f/f8/A_Hundred_Pipers.ogg"
+      });
+      },
+      swfPath: "/js",
+      supplied: "oga",
+      volume: "0.8",
+      cssSelectorAncestor: "#jp_slave_container",
+      cssSelector: {
+      videoPlay: "#jp-video-play_s", // *
+      play: "#jp-play_s",
+      pause: "#jp-pause_s",
+      stop: "#jp-stop_s",
+      seekBar: "#jp-seek-bar_s",
+      playBar: "#jp-play-bar_s",
+      mute: "#jp-mute_s",
+      unmute: "#jp-unmute_s",
+      volumeBar: "#jp-volume-bar_s",
+      volumeBarValue: "#jp-volume-bar-value_s",
+      volumeMax: "#jp-volume-max_s",
+      currentTime: "#jp-current-time_s",
+      duration: "#jp-duration_s",
+      fullScreen: "#jp-full-screen_s", // *
+      restoreScreen: "#jp-restore-screen_s", // *
+      repeat: "#jp-repeat_s",
+      repeatOff: "#jp-repeat-off_s",
+      gui: "#jp-gui_s1", // The interface used with autohide feature.
+      noSolution: "#jp-no-solution_s" // For error feedback when jPlayer cannot find a solution.
+      },
+      });
+      });
+  body
+    #slave_jplayer.jp-jplayer
+    #jp_slave_container.jps-audio
+      .jp-type-single
+        #jp-gui_s.jp-gui.jps-interface
+          ul.jps-controls
+            li
+              a#jp-mute_s.jp-mute(href='javascript:;', tabindex='1', title='mute') mute
+            li
+              a#jp-unmute_s.jp-unmute(href='javascript:;', tabindex='1', title='unmute') unmute
+            li
+              a#jp-volume-max_s.jp-volume-max(href='javascript:;', tabindex='1', title='max volume') max volume
+          #jp-volume-bar_s.jp-volume-bar
+            #jp-volume-bar-value_s.jp-volume-bar-value
+        .jp-no-solution
+          span Update Required
+          | To play the media you will need to either update your browser to a recent version or update your
+          a(href='http://get.adobe.com/flashplayer/', target='_blank') Flash plugin
+          | .
