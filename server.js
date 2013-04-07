@@ -38,7 +38,9 @@ var app = express();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
+app.engine('.html', require('jade'));
 app.set('views', __dirname + '/views');
+app.engine('.html', require('jade').__express); app.set('view engine', 'html');
 app.set('view engine', 'jade');
 app.use(express.favicon());
 app.use(express.logger('dev'));
