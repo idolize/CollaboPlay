@@ -10,5 +10,7 @@ block content
 			th= "Description"
 		each item in list
 			tr
-				td= item.title
+				td
+					name = "project?id=" + item._id
+					a(href=name)= item.title
 				td= item.description

@@ -63,7 +63,17 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/project', routes.project);
+app.get('/project', function(req, res){
+	ProjectModel.find({'_id': req.query.id}, {}, {}, function(err, data){
+		res.render('project', {
+			title: 'Project',
+			req: req,
+			user: req.user,
+			list: data
+		});
+		console.log(data);
+	})
+});
 app.get('/users', routes.users);
 app.get('/project_list', routes.users);
 app.get('/account', ensureAuthenticated, routes.account);
@@ -79,16 +89,16 @@ app.post('/new_project', ensureAuthenticated, function(req, res){
  	res.redirect('/');
  });
 
-app.get('/browseprojects', ensureAuthenticated, function(req, res){
+app.get('/myprojects', ensureAuthenticated, function(req, res){
 	ProjectModel.find({'userId': req.user.id}, {}, {}, function(err, data){
-		res.render('test', {
-			title: 'test',
+		res.render('myprojects', {
+			title: 'My Projects',
 			user: req.user,
-			testContent: 'asdfasdf',
 			list: data
 		});
 	})
 })
+
 
 // GET /auth/facebook
 //   Use passport.authenticate() as route middleware to authenticate the
@@ -119,7 +129,7 @@ app.get('/logout', function(req, res){
 });
 
 app.get('/fileupload', ensureAuthenticated, routes.fileupload);
-app.post('/upload', ensureAuthenticated, routes.upload);
+app.post('/upload', ensureAuthenticated, addTrack, routes.upload);
 
 // app.get('/test', function(req, res, next) {
 // 	res.render('test', {
@@ -153,14 +163,27 @@ function ensureAuthenticated(req, res, next) {
 	res.redirect('/');
 }
 
-function addTrack(params){
+function addTrack(req, res, next) {
+	var params = {
+		"title": req.param("title"),
+			"userId": req.user.id,
+			"description": req.param('description'),
+			"fileLocation": "",
+	}
+	
 	var newtrack = new TrackModel(params);
 	newtrack.save(function(err, newTrack){
 		if (err){
 			console.error(err.text);
+		} else {
+			console.log("New track named '%s' is created", newTrack.title);
+			return next();
 		}
 	});
-}
+	}
+
+	
+
 
 function addProject(params){
 	var newproject = new ProjectModel(params);
