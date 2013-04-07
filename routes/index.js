@@ -28,14 +28,6 @@ exports.account = function(req, res){
 
 
 /*
- * GET project page.
- */
-
-exports.project = function(req, res){
-	res.render('project', { title: title, req: req, user: req.user });
-};
-
-/*
  * GET file upload page.
  */
 exports.fileupload = function(req, res){

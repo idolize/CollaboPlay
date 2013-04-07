@@ -3,8 +3,8 @@ extends layout
 
 
 block content   
-	if (req.query.id)
-		h1 You are on project #{req.query.id}
+	if (list[0].title)
+		h1 You are on project #{list[0].title}
 	else 
 		h1 You are on project 1
 
