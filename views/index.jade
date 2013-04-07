@@ -1,11 +1,18 @@
 extends layout
 
-block content   
-	h1= title   
-	p Welcome to #{title}!
-	p This is public amateur <strong>collaborative</strong> web application. 
-	- if (!user)
-		a(href="/auth/facebook") Login with Facebook 
-	- else
-		p Hello, #{user.displayName}
-		a(href="fileupload") Upload a file
+
+
+block content  
+	include ./JPlayer.html
+	#content_bottom
+		h1= title   
+		p Welcome to #{title}!
+		p This is public amateur <strong>collaborative</strong> web application. 
+		- if (!user)
+			a(href="/auth/facebook") Login with Facebook 
+		- else
+			p Hello, #{user.displayName}
+			p
+			a(href="browseprojects") Browse projects
+
+

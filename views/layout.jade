@@ -3,11 +3,22 @@ html
   head
     title= title
     link(rel='stylesheet', href='/css/style.css')
+    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Roboto:400,300,100')
   body
     #navigation
       h1= title
+      #nav_bar
+        ul
+         li
+          a(href="/") Home
+         li 
+          a(href="project_list") Projects
+         li 
+          a(href="users") Users
+         li 
+          a(href="fileupload") Upload
     #content
       block content
 
     #footer
-      p copyright Music App
+      p Copyright 2013 Music App

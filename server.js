@@ -64,6 +64,8 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/project', routes.project);
+app.get('/users', routes.users);
+app.get('/project_list', routes.users);
 app.get('/account', ensureAuthenticated, routes.account);
 
 // GET /auth/facebook
