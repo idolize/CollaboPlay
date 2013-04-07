@@ -39,7 +39,6 @@ var app = express();
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
-app.engine('.html', require('jade').__express); app.set('view engine', 'html');
 app.set('view engine', 'jade');
 app.use(express.favicon());
 app.use(express.logger('dev'));
@@ -62,6 +61,8 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/project', routes.project);
+app.get('/users', routes.users);
+app.get('/project_list', routes.users);
 app.get('/account', ensureAuthenticated, routes.account);
 
 // GET /auth/facebook

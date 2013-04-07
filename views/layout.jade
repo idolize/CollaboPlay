@@ -9,12 +9,14 @@ html
       h1= title
       #nav_bar
         ul
+         li
+          a(href="/") Home
          li 
-          a Projects
+          a(href="project_list") Projects
          li 
-          a Users
+          a(href="users") Users
          li 
-          a Upload
+          a(href="fileupload") Upload
     #content
       block content
 

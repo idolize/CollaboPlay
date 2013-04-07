@@ -44,6 +44,8 @@ body {
 }
 #content {
   text-align: center;
+  background: #eee;
+  padding: 40px;
 }
 #footer {
   background-color: #f93;
