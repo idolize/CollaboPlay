@@ -1,0 +1,18 @@
+extend layout
+
+block content
+    form
+        | Project name:
+        input(type='text', name='projName')
+        br
+        | Collaborators:
+        input(type='text', name='collaborators')
+        br
+        | Upload file:
+        input(type='text', name='musicFile')
+
+        p You have the following projects:
+        - var records = [ { title: 'one', author: 'one' }, { title: 'two', author: 'two' } ];
+        ol
+          -each post in records
+               li #{post.title} was written by #{post.author}

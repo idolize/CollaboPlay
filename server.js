@@ -62,9 +62,11 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/account', ensureAuthenticated, routes.account);
 
-app.get('/login', function(req, res){
-	res.render('login', { user: req.user });
-});
+//app.get('/login', function(req, res){
+//	res.render('login', { user: req.user });
+//});
+
+app.get('/test', routes.test); 
 
 // GET /auth/facebook
 //   Use passport.authenticate() as route middleware to authenticate the
