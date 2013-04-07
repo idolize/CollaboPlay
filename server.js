@@ -3,7 +3,10 @@ var express = require('express')
 , http = require('http')
 , path = require('path')
 , passport = require('passport')
-, FacebookStrategy = require('passport-facebook').Strategy;
+, FacebookStrategy = require('passport-facebook').Strategy
+, mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/test');
+var db = mongoose.connection;
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -111,44 +114,61 @@ function ensureAuthenticated(req, res, next) {
 }
 
 function initDatabase(){
-	var db = mongoose.connection;
+	
 	db.on('error', console.error.bind(console, 'connection error:'));
-	db.once('open', function callback () {
-	  console.log("Connected to 'test' db.")
-	});
+	db.once('open', function callback () {});
 
-	var trackSchema = new mongoose.Schema({
-	  title:  String,
-	  creatorId: Number,
-	  description:   String,
-	  type: String,
-	  date: { type: Date, default: Date.now },
+	
+	//newtrack.getTitle();
+	var trackSchema;
+	trackSchema = new mongoose.Schema({
+		title:  String,
+		creatorId: Number,
+		description:   String,
+		type: String,
+		date: { type: Date, default: Date.now },
 	});
-
 	trackSchema.methods.getTitle = function(){
 		console.log("Track #" + this.creatorId + " has the Title " + this.title);
 	}
 
 	var Track = mongoose.model('Track', trackSchema);
-	var params = {title: "Carry On Wayward Sun Cover", creatorId: 1, description: "A Cover of the Boston song", type: "guitar"};
+
+	var params = {title: "A Day in the Life Cover", type: "guitar", creatorId: 1, description: "A Cover of the Beatles song"};
 	var newtrack = new Track(params);
-	//newtrack.getTitle();
+	newtrack.save(function(err, newTrack){
+		if (err){
+			console.error(err.text);
+		}
+		//newTrack.getTitle();
 
-	// newtrack.save(function(err, newTrack){
-	// 	if (err){
-	// 		console.error(err.text);
-	// 	}
-	// 	newTrack.getTitle();
-
-	// });
-	Track.findOne({'creatorId': 1}, 'title description', function(err, track){
-		if (err) return handleError(err);
-		console.log("Title %s \n Description %s", track.title, track.description);
 	});
-	// Track.find(function (err, tracks) {
-	// 	if (err) console.error(err.text);
-	// 	console.log(tracks);
-	// });
+	
+	
+
+	var returnObject;
+	Track.find({'creatorId': 1}, 'title description', function(err, track){
+		if (err) return handleError(err);
+		console.log(track);
+	});
+	//console.log("Title: %s \nDescription: %s", track.title, track.description);
+	return returnObject;
+}
+
+function getSchema(collection){
+	if (collection == "track"){
+		var trackSchema = new mongoose.Schema({
+			title:  String,
+			creatorId: Number,
+			description:   String,
+			type: String,
+			date: { type: Date, default: Date.now },
+		});
+		trackSchema.methods.getTitle = function(){
+			console.log("Track #" + this.creatorId + " has the Title " + this.title);
+		}
+		return trackSchema;
+	}
 }
 
 initDatabase();
