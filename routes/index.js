@@ -1,4 +1,4 @@
-var title = 'Music App';
+var title = 'CollaboPlay';
 
 
 /*
@@ -6,7 +6,7 @@ var title = 'Music App';
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'CollaboPlay', user: req.user });
+  res.render('index', { title: title, user: req.user });
 };
 
 
