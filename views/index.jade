@@ -2,7 +2,10 @@ extends layout
 
 block content   
 	h1= title   
-	p Welcome to #{title}!   
-	p.
-		This is public amateur <b> collaborative </b> web application. 
-		You can select which projects you enjoy and your personal twist to the song.
+	p Welcome to #{title}!
+	p This is public amateur <strong>collaborative</strong> web application. 
+	- if (!user)
+		a(href="/auth/facebook") Login with Facebook 
+	- else
+		p Hello, #{user.displayName}
+		a(href="fileupload") Upload a file
