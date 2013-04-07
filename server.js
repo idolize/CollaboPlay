@@ -118,31 +118,16 @@ function initDatabase(){
 	db.on('error', console.error.bind(console, 'connection error:'));
 	db.once('open', function callback () {});
 
-	
-	//newtrack.getTitle();
-	var trackSchema;
-	trackSchema = new mongoose.Schema({
-		title:  String,
-		creatorId: Number,
-		description:   String,
-		type: String,
-		date: { type: Date, default: Date.now },
-	});
-	trackSchema.methods.getTitle = function(){
-		console.log("Track #" + this.creatorId + " has the Title " + this.title);
-	}
-
-	var Track = mongoose.model('Track', trackSchema);
+	var Track = initUserTrackDatabase();
+	var Project = initUserProjectDatabase();
 
 	var params = {title: "A Day in the Life Cover", type: "guitar", creatorId: 1, description: "A Cover of the Beatles song"};
 	var newtrack = new Track(params);
-	newtrack.save(function(err, newTrack){
-		if (err){
-			console.error(err.text);
-		}
-		//newTrack.getTitle();
-
-	});
+	// newtrack.save(function(err, newTrack){
+	// 	if (err){
+	// 		console.error(err.text);
+	// 	}
+	// });
 	
 	
 
@@ -171,6 +156,41 @@ function getSchema(collection){
 	}
 }
 
-initDatabase();
+function initUserTrackDatabase(){
+	var trackSchema;
+	trackSchema = new mongoose.Schema({
+		title:  String,
+		userId: Number,
+		description:   String,
+		fileLocation: String,
+		date: { type: Date, default: Date.now },
+	});
+	// trackSchema.methods.getTitle = function(){
+	// 	console.log("Track #" + this.creatorId + " has the Title " + this.title);
+	// }
 
+	var Track = mongoose.model('Track', trackSchema);
+	return Track;
+}
+
+function initUserProjectDatabase(){
+	var projectSchema;
+	projectSchema = new mongoose.Schema({
+		title:  String,
+		userId: Number,
+		description:   String,
+		date: { type: Date, default: Date.now },
+	});
+	// trackSchema.methods.getTitle = function(){
+	// 	console.log("Track #" + this.creatorId + " has the Title " + this.title);
+	// }
+
+	var Project = mongoose.model('Project', projectSchema);
+	return Project;
+}
+
+
+initDatabase();
+var Track = initUserTrackDatabase();
+var Project = initUserProjectDatabase();
 
