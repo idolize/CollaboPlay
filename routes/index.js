@@ -19,9 +19,6 @@ exports.index = function(req, res){
 exports.users = function(req, res){
   res.render('users', { title: title, user: req.user });
 };
-exports.users = function(req, res){
-  res.render('project_list', { title: title, user: req.user });
-};
 
 
 /*
