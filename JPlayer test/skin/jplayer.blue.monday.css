@@ -31,7 +31,7 @@ div.jp-video {
 	background-color:#eee;
 }
 div.jp-audio {
-	width:420px;
+	width:600px;
 }
 div.jp-audio-stream {
 	width:182px;
@@ -57,6 +57,12 @@ div.jp-video-full div div {
 
 div.jp-video-full div.jp-jplayer {
 	top: 0;
+	left: 0;
+	position: fixed !important; position: relative; /* Rules for IE6 (full-screen) */
+	overflow: hidden;
+}
+div#jquery_jplayer_2 {
+	top: 80;
 	left: 0;
 	position: fixed !important; position: relative; /* Rules for IE6 (full-screen) */
 	overflow: hidden;
