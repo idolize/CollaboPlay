@@ -4,5 +4,10 @@ block content
 	h1 File upload   
 	p Upload a file here
 	form(action="upload", method="post", enctype="multipart/form-data")
-		input(type="file", name="audioFile")
+		p Name:
+			input(type="text", name="title")
+		p Description (optional):
+			input(type="text", name="description")
+		p Select File:
+			input(type="file", name="audioFile")
 		input(type="submit", value="Upload")

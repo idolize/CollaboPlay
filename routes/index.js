@@ -51,8 +51,9 @@ exports.new_project = function(req, res){
  */
  exports.upload = function(req, res){
  	fs.readFile(req.files.audioFile.path, function (err, data) {
- 		var newPath = __dirname + '/../uploads/'+ req.files.audioFile.name;
- 		console.log(__dirname + '/../uploads/'+ req.files.audioFile.name);
+ 		var filename = req.user.id + '.' + req.param('title');
+ 		var newPath = __dirname + '/../uploads/'+ filename;
+ 		console.log(__dirname + '/../uploads/'+ filename);
  		fs.writeFile(newPath, data, function (err) {
  			res.redirect('back');
  		});

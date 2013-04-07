@@ -90,6 +90,7 @@ app.get('/browseprojects', ensureAuthenticated, function(req, res){
 	})
 })
 
+
 // GET /auth/facebook
 //   Use passport.authenticate() as route middleware to authenticate the
 //   request.  The first step in Facebook authentication will involve
@@ -119,7 +120,7 @@ app.get('/logout', function(req, res){
 });
 
 app.get('/fileupload', ensureAuthenticated, routes.fileupload);
-app.post('/upload', ensureAuthenticated, routes.upload);
+app.post('/upload', ensureAuthenticated, addTrack, routes.upload);
 
 // app.get('/test', function(req, res, next) {
 // 	res.render('test', {
@@ -153,14 +154,27 @@ function ensureAuthenticated(req, res, next) {
 	res.redirect('/');
 }
 
-function addTrack(params){
+function addTrack(req, res, next) {
+	var params = {
+		"title": req.param("title"),
+			"userId": req.user.id,
+			"description": req.param('description'),
+			"fileLocation": "",
+	}
+	
 	var newtrack = new TrackModel(params);
 	newtrack.save(function(err, newTrack){
 		if (err){
 			console.error(err.text);
+		} else {
+			console.log("New track named '%s' is created", newTrack.title);
+			return next();
 		}
 	});
-}
+	}
+
+	
+
 
 function addProject(params){
 	var newproject = new ProjectModel(params);
