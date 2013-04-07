@@ -37,10 +37,10 @@ body {
 	float:left;
 }
 #nav_bar ul li a{
-	text-color:#aaaaaa;
+	color:#000;
 }
 #nav_bar ul li:hover{
-	text-coler:#aaa;
+	text-color:#333;
 }
 #content {
 	text-align:center;
