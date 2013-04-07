@@ -16,7 +16,9 @@
 
 .jp-title ul{
 	list-style:none;
+	background:#aaa;
 }
+
 div.jp-audio,
 div.jps-audio{
 
@@ -34,7 +36,8 @@ div.jpm-audio {
 	width:498px;
 }
 div.jps-audio {
-	margin-top:20px
+	margin-top:20px;
+	height:70px;
 }
 
 div.jp-interface {
@@ -55,6 +58,7 @@ div.jps-interface ul.jps-controls {
 	margin:0;
 	padding: 0;
 	overflow:hidden;
+	height:50px;
 }
 
 div.jp-audio ul.jp-controls {
