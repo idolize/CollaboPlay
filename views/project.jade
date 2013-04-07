@@ -3,10 +3,16 @@ extends layout
 
 
 block content   
+
+
 	if (list[0].title)
 		h1 You are on project #{list[0].title}
 	else 
 		h1 You are on project 1
+
+	form(method="get", action="/fileupload")
+		input(type='hidden', name='projectId', value=req.query.id)
+		input(type="submit", value="Add New Track")
 
 	#track_container
 		#master_control

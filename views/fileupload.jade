@@ -10,4 +10,5 @@ block content
 			input(type="text", name="description")
 		p Select File:
 			input(type="file", name="audioFile")
+		input(type='hidden', name='projectId', value=req.query.projectId)
 		input(type="submit", value="Upload")

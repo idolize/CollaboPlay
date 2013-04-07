@@ -31,7 +31,7 @@ exports.account = function(req, res){
  * GET file upload page.
  */
 exports.fileupload = function(req, res){
-	res.render('fileupload', { title: title, user: req.user });
+	res.render('fileupload', { title: title, req:req, user: req.user });
 };
 
 exports.new_project = function(req, res){

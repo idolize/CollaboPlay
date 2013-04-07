@@ -166,9 +166,9 @@ function ensureAuthenticated(req, res, next) {
 function addTrack(req, res, next) {
 	var params = {
 		"title": req.param("title"),
-			"userId": req.user.id,
-			"description": req.param('description'),
-			"fileLocation": "",
+		"userId": req.user.id,
+		"description": req.param('description'),
+		"fileLocation": "",
 	}
 	
 	var newtrack = new TrackModel(params);
@@ -177,13 +177,38 @@ function addTrack(req, res, next) {
 			console.error(err.text);
 		} else {
 			console.log("New track named '%s' is created", newTrack.title);
+
+			// if there is no projectId parameter in the GET request, then exit
+			// If there is one, add this track to the project associated with the projectId
+			if (!req.param('projectId')){
+				return next();
+			}
+			//console.log(req.param('projectId'));
+
+			ProjectModel.findOne({'_id': req.param('projectId')}, '', function(err, data)
+			{
+				if (err) return handleError(err);
+				paramsTP = {
+					'trackId': newTrack._id,
+					'trackTitle': newTrack.title,
+					'projectId': data._id,
+					'projectTitle': data.title
+				}
+				var newTrackProject = new TrackProjectModel(paramsTP);
+				newTrackProject.save(function(err, dataTP)
+				{
+					if (err){
+						console.error(err.text);
+					}
+					console.log("New TrackProject named '%s' is created", dataTP.title);
+							//console.log("trackid: %s, trackTitle: %s, projectid: %s, projectName: %s", newTrack._id, newTrack.title, data._id, data.title);
+				});
+			});
 			return next();
 		}
 	});
-	}
 
-	
-
+}
 
 function addProject(params){
 	var newproject = new ProjectModel(params);
