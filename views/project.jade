@@ -8,27 +8,27 @@ block content
 	else 
 		h1 You are on project 1
 
-	numberOfTypesOfTracks = 3;
 	#track_container
 		#master_control
+			include ./master_jplayer.html
 		ul#track_type_list
 			li.track_type
 				h1 Vocals
 				ul.track_list
-					li track1
-					li track2
+					li #{req.query.vocals1}
+					li #{req.query.vocals2}
 			li.track_type 
 				h1 Guitar
 				ul.track_list
-					li track1
-					li track2
+					li #{req.query.guitar1}
+					li #{req.query.guitar2}
 			li.track_type 
 				h1 Percussion
 				ul.track_list
-					li track1
-					li track2
+					li #{req.query.percussion1}
+					li #{req.query.percussion2}
 			li.track_type 
 				h1 Wind
 				ul.track_list
-					li track1
-					li track2
+					li #{req.query.wind1}
+					li #{req.query.wind2}

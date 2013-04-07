@@ -54,43 +54,39 @@ body {
   text-align: center;
   margin-top: 10px;
 }
-
-
 /************* Projects **********/
-#master_control{
-  width:500px;
-  height:150px;
-  margin:10px;
+#master_control {
+  width: 500px;
+  height: 112px;
+  margin: 10px;
   border: 1px solid #222;
-  margin-left:250px;
+  margin-left: 250px;
 }
-
-#track_container{
-  height:500px;
-  margin-top:40px;
+#track_container {
+  height: 500px;
+  margin-top: 40px;
 }
-
-#track_type_list{
-  height:250px;
-  width:inherit;
+#track_type_list {
+  height: 250px;
+  width: inherit;
 }
-
-.track_type{
-  width:240px;
-  list-style:none;
-  height:350px;
-  float:left;
+.track_type {
+  width: 240px;
+  list-style: none;
+  height: 350px;
+  float: left;
   border-left: 2px solid #222;
   border-right: 2px solid #222;
-  margin:5px;
+  margin: 5px;
+}
+.track_list {
+  list-style: none;
+  height: 350px;
+}
+.track_list li {
+  height: 150px;
 }
 
-.track_list{
-  list-style:none;
-  height:350px;
-}
+/********* Master control **********/
 
-.track_list li{
-  height:150px;
-}
 
