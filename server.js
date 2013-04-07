@@ -90,6 +90,9 @@ app.get('/logout', function(req, res){
 	res.redirect('/');
 });
 
+app.get('/fileupload', ensureAuthenticated, routes.fileupload);
+app.post('/upload', ensureAuthenticated, routes.upload);
+
 
 http.createServer(app).listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));
