@@ -1,12 +1,16 @@
 extends layout
 
 block content   
+<<<<<<< HEAD
 
 
-	if (project_data.title)
-		h1 You are on project "#{project_data.title}"
-	else
-		h1 You are on project page
+	if (list[0].title)
+		h1 You are on project #{list[0].title}
+	else 
+		h1 You are on project 1
+=======
+	h1 You are on project 1
+>>>>>>> 184f8251bb8fc81888fa0b86d48449f53f14f7ee
 
 	form(method="get", action="/fileupload")
 		input(type='hidden', name='projectId', value=req.query.id)

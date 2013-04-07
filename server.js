@@ -4,8 +4,9 @@ var express = require('express')
 , path = require('path')
 , passport = require('passport')
 , FacebookStrategy = require('passport-facebook').Strategy
-, mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+, mongoose = require('mongoose')
+, path = require('path');
+mongoose.connect('mongodb://localhost/collabdb');
 var db = mongoose.connection;
 
 // Passport session setup.
@@ -64,14 +65,22 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/project', function(req, res){
-	ProjectModel.find({'_id': req.query.id}, {}, {}, function(err, data){
+	ProjectModel.findOne({'_id': req.query.id}, {}, {}, function(err, data){
+		TrackProjectModel.find({'projectId': data._id}, {}, {}, function(err, data2){
+			//console.log(data2);
+			var track_data = [];
+			console.log(data2);
+			for (var i = 0 ; i < data2.length ; i++) {
+   				//console.log(data2[i].trackTitle);
+			}
+		})
 		res.render('project', {
 			title: 'Project',
 			req: req,
 			user: req.user,
-			list: data
+			project_data: data,
 		});
-		console.log(data);
+		//console.log(data);
 	})
 });
 app.get('/users', routes.users);
@@ -169,6 +178,8 @@ function addTrack(req, res, next) {
 		"userId": req.user.id,
 		"description": req.param('description'),
 		"fileLocation": "",
+		"type": req.param('type'),
+		"extension": getExtension(req.files.audioFile.name)
 	}
 	
 	var newtrack = new TrackModel(params);
@@ -192,16 +203,19 @@ function addTrack(req, res, next) {
 					'trackId': newTrack._id,
 					'trackTitle': newTrack.title,
 					'projectId': data._id,
-					'projectTitle': data.title
+					'projectTitle': data.title,
+					'trackType': newTrack.type,
+					'trackExtension': newTrack.extension,
 				}
 				var newTrackProject = new TrackProjectModel(paramsTP);
 				newTrackProject.save(function(err, dataTP)
 				{
 					if (err){
-						console.error(err.text);
+						console.error(err, + " | problem in newTrack.save");
+					} else {
+						console.log("New TrackProject betweem track '%s' and project '%s' is created", dataTP.trackTitle, dataTP.projectTitle);
 					}
-					console.log("New TrackProject named '%s' is created", dataTP.title);
-							//console.log("trackid: %s, trackTitle: %s, projectid: %s, projectName: %s", newTrack._id, newTrack.title, data._id, data.title);
+					//console.log("trackid: %s, trackTitle: %s, projectid: %s, projectName: %s", newTrack._id, newTrack.title, data._id, data.title);
 				});
 			});
 			return next();
@@ -229,6 +243,11 @@ function getTracksByUserId(userId){
 	});
 }
 
+function getExtension(filename) {
+    var ext = path.extname(filename||'').split('.');
+    return ext[ext.length - 1];
+}
+
 function initDatabase(){
 	
 	db.on('error', console.error.bind(console, 'connection error:'));
@@ -253,6 +272,8 @@ function initUserTrackDatabase(){
 		userId: Number,
 		description:   String,
 		fileLocation: String,
+		type: String,
+		extension: String,
 		date: { type: Date, default: Date.now },
 	});
 	// trackSchema.methods.getTitle = function(){
@@ -279,10 +300,12 @@ function initUserProjectDatabase(){
 function initTrackProjectDatabase(){
 	var trackProjectSchema;
 	trackProjectSchema = new mongoose.Schema({
-		trackId: Number,
+		trackId: String,
 		trackTitle:  String,
-		projectId:   Number,
+		projectId:   String,
 		projectTitle: String,
+		trackType: String,
+		trackExtension: String,
 	});
 
 	var TrackProject = mongoose.model('TrackProject', trackProjectSchema);
@@ -294,6 +317,8 @@ initDatabase();
 var TrackModel = initUserTrackDatabase();
 var ProjectModel = initUserProjectDatabase();
 var TrackProjectModel = initTrackProjectDatabase()
+
+//console.log(getExtension("waivers.log"));
 
 // var params = {
 // 	title: "Pumped Up Kicks",

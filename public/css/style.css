@@ -55,21 +55,17 @@ body {
   margin-top: 10px;
 }
 /*************Project List********/
-#project_list ul{
-  list-style:none;
-  display:block;
+#project_list ul {
+  list-style: none;
+  display: block;
 }
- 
-.project_row{
-  height:150px;
+.project_row {
+  height: 150px;
 }
- 
-.project_row ul li{
-  float:left;
-  width:250px;
+.project_row ul li {
+  float: left;
+  width: 250px;
 }
- 
- 
 /************* Projects **********/
 #master_control {
   width: 500px;
@@ -98,4 +94,7 @@ body {
 .track_list {
   list-style: none;
   height: 350px;
+}
+.track_list li {
+  height: 150px;
 }

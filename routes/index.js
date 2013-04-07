@@ -1,5 +1,11 @@
 var title = 'CollaboPlay';
 fs = require('fs');
+path = require('path');
+
+function getExtension(filename) {
+    var ext = path.extname(filename||'').split('.');
+    return ext[ext.length - 1];
+}
 
 
 /*
@@ -43,7 +49,7 @@ exports.new_project = function(req, res){
  */
  exports.upload = function(req, res){
  	fs.readFile(req.files.audioFile.path, function (err, data) {
- 		var filename = req.user.id + '.' + req.param('title');
+ 		var filename = req.user.id + '.' + req.param('title') + "." + getExtension(req.files.audioFile.name);
  		var newPath = __dirname + '/../uploads/'+ filename;
  		console.log(__dirname + '/../uploads/'+ filename);
  		fs.writeFile(newPath, data, function (err) {
