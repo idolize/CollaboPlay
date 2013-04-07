@@ -6,11 +6,29 @@ block content
 	if (req.query.id)
 		h1 You are on project #{req.query.id}
 	else 
-		h1 You are on project 0
+		h1 You are on project 1
 
 	numberOfTypesOfTracks = 3;
-	#original_track
-		p Here goes the original track
-	- for ( i = 0 ; i < numberOfTypesOfTracks ; i++){
-		p Here is another track
-	- }
+	#track_container
+		#master_control
+		ul#track_type_list
+			li.track_type
+				h1 Vocals
+				ul.track_list
+					li track1
+					li track2
+			li.track_type 
+				h1 Guitar
+				ul.track_list
+					li track1
+					li track2
+			li.track_type 
+				h1 Percussion
+				ul.track_list
+					li track1
+					li track2
+			li.track_type 
+				h1 Wind
+				ul.track_list
+					li track1
+					li track2
