@@ -3,7 +3,7 @@ body {
   font: 14px "Roboto", sans-serif;
   font-weight:400;
 }
-a {
+#content a {
   color: #00b7ff;
 }
 *{
@@ -25,7 +25,6 @@ a {
 	height:50px
 	position:absolute;
 	margin-left:20px;
-
 }
 #nav_bar ul{
 	display:block;
@@ -36,6 +35,12 @@ a {
 	width:100px;
 	height:30px;
 	float:left;
+}
+#nav_bar ul li a{
+	text-color:#aaaaaa;
+}
+#nav_bar ul li:hover{
+	text-coler:#aaa;
 }
 #content {
 	text-align:center;
