@@ -6,11 +6,11 @@ html
     script(type='text/javascript')
       $(document).ready(function(){
         //param
-      $("#slave_jplayer").jPlayer({
+      $("#slave_jplayerP").jPlayer({
       ready: function () {
       $(this).jPlayer("setMedia", {
         //param
-      oga: "http://upload.wikimedia.org/wikipedia/commons/f/f8/A_Hundred_Pipers.ogg"
+      oga: "http://upload.wikimedia.org/wikipedia/commons/b/b0/Adagio_sonate_rem_Finger.ogg"
       // oga: "./uploads/"+object.userId+"."+object.title"
       });
       },
@@ -18,33 +18,34 @@ html
       supplied: "oga",
       volume: "0.8",
       //param
-      cssSelectorAncestor: "#jp_slave_container",
+      cssSelectorAncestor: ".track_container",
       cssSelector: {
       //params
-      mute: "#jp-mute_s",
-      unmute: "#jp-unmute_s"+i,
-      volumeBar: "#jp-volume-bar_s",
-      volumeBarValue: "#jp-volume-bar-value_s",
-      volumeMax: "#jp-volume-max_s",
-      gui: "#jp-gui_s1", // The interface used with autohide feature.
-      noSolution: "#jp-no-solution_s" // For error feedback when jPlayer cannot find a solution.
+      loop:true,
+      mute: "#jp-mute_sP",
+      unmute: "#jp-unmute_sP",
+      volumeBar: "#jp-volume-bar_sP",
+      volumeBarValue: "#jp-volume-bar-value_sP",
+      volumeMax: "#jp-volume-max_sP",
+      gui: "#jp-gui_sG", // The interface used with autohide feature.
+      noSolution: "#jp-no-solution_sP" // For error feedback when jPlayer cannot find a solution.
       },
       });
       });
   body
-    #slave_jplayer.jp-jplayer
+    #slave_jplayerP.jp-jplayer
     #jp_slave_container.jps-audio
       .jp-type-single
         #jp-gui_s.jp-gui.jps-interface
           ul.jps-controls
             li
-              a#jp-mute_s.jp-mute(href='javascript:;', tabindex='1', title='mute') mute
+              a#jp-mute_sP.jp-mute(href='javascript:;', tabindex='1', title='mute') mute
             li
-              a#jp-unmute_s.jp-unmute(href='javascript:;', tabindex='1', title='unmute') unmute
+              a#jp-unmute_sP.jp-unmute(href='javascript:;', tabindex='1', title='unmute') unmute
             li
-              a#jp-volume-max_s.jp-volume-max(href='javascript:;', tabindex='1', title='max volume') max volume
-          #jp-volume-bar_s.jp-volume-bar
-            #jp-volume-bar-value_s.jp-volume-bar-value
+              a#jp-volume-max_sP.jp-volume-max(href='javascript:;', tabindex='1', title='max volume') max volume
+          #jp-volume-bar_sP.jp-volume-bar
+            #jp-volume-bar-value_sP.jp-volume-bar-value
         .jp-no-solution
           span Update Required
           | To play the media you will need to either update your browser to a recent version or update your
