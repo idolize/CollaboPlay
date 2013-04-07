@@ -63,10 +63,6 @@ app.get('/', routes.index);
 app.get('/project', routes.project);
 app.get('/account', ensureAuthenticated, routes.account);
 
-app.get('/login', function(req, res){
-	res.render('login', { user: req.user });
-});
-
 // GET /auth/facebook
 //   Use passport.authenticate() as route middleware to authenticate the
 //   request.  The first step in Facebook authentication will involve
@@ -94,6 +90,9 @@ app.get('/logout', function(req, res){
 	req.logout();
 	res.redirect('/');
 });
+
+app.get('/fileupload', ensureAuthenticated, routes.fileupload);
+app.post('/upload', ensureAuthenticated, routes.upload);
 
 
 http.createServer(app).listen(app.get('port'), function(){
