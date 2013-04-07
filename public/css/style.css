@@ -1,28 +1,26 @@
 body {
   font: 14px "Roboto", sans-serif;
-  background: url('http://www.worshipmatters.com/wp-content/uploads/2011/01/electric20guitar.jpg');
+  background: url("http://www.worshipmatters.com/wp-content/uploads/2011/01/electric20guitar.jpg");
   background-position: top center;
   background-attachment: fixed;
   background-size: cover;
-  height:900px;
+  height: 900px;
 }
-#body_container{
-  padding:20px;
-  
-
+#body_container {
+  padding: 20px;
 }
 #content a {
   color: #00b7ff;
 }
 #content_bottom {
-  font-size:24px;
+  font-size: 24px;
   line-height: 2em;
 }
 * {
   margin: 0;
   padding: 0;
-  font-weight:300;
-  opacity:0.95;
+  font-weight: 300;
+  opacity: 0.95;
 }
 #navigation {
   background-color: #f93;
@@ -32,14 +30,14 @@ body {
 }
 #navigation h1 {
   padding-top: 5px;
-  padding-left:20px;
+  padding-left: 20px;
 }
 #nav_bar {
-  margin-left:20px;
-  margin-right:20px;
-  width:auto;
-  padding-top:5px;
-  border-top:1px solid #333;
+  margin-left: 20px;
+  margin-right: 20px;
+  width: auto;
+  padding-top: 5px;
+  border-top: 1px solid #333;
   height: 50px;
   position: relative;
 }
@@ -55,10 +53,10 @@ body {
 }
 #nav_bar ul li a {
   color: #000;
-  text-decoration:none;
+  text-decoration: none;
 }
 #nav_bar ul li:hover > a {
-  color:#eee;
+  color: #eee;
 }
 #content {
   text-align: center;
@@ -79,23 +77,20 @@ body {
 }
 .project_row {
   height: 150px;
-  border-bottom:1 px solid #222;
+  border-bottom: 1 px solid #222;
 }
 .project_row ul li {
   float: left;
   width: 250px;
-  margin-right:100px;
-  font-size:32px;
+  margin-right: 100px;
+  font-size: 32px;
 }
-
-.project_row ul li a{
+.project_row ul li a {
   text-decoration: none;
 }
-
-.project_row ul li a:hover{
-  text-color:#222;
+.project_row ul li a:hover {
+  text-color: #222;
 }
-
 /************* Projects **********/
 #master_control {
   width: 500px;
@@ -103,14 +98,14 @@ body {
   margin: 10px;
   border: 1px solid #222;
   margin-left: 250px;
-  margin-bottom:30px;
-  background:#eee;
-  opacity:1;
+  margin-bottom: 30px;
+  background: #eee;
+  opacity: 1;
 }
 #track_container {
   height: 500px;
   margin-top: 40px;
-  opacity:1;
+  opacity: 1;
 }
 #track_type_list {
   height: 250px;
@@ -124,13 +119,10 @@ body {
   border-right: 2px solid #222;
   padding: 5px;
 }
-#left-track{
+#left-track {
   border-left: 2px solid #222;
 }
 .track_list {
   list-style: none;
   height: 350px;
-}
-.track_list li {
-  height: 150px;
 }

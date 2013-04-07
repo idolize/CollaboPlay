@@ -4,8 +4,7 @@ var express = require('express')
 , path = require('path')
 , passport = require('passport')
 , FacebookStrategy = require('passport-facebook').Strategy
-, mongoose = require('mongoose')
-, path = require('path');
+, mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/collabdb');
 var db = mongoose.connection;
 
@@ -84,7 +83,15 @@ app.get('/project', function(req, res){
 	})
 });
 app.get('/users', routes.users);
-app.get('/project_list', routes.users);
+app.get('/project_list', function(req, res){
+	ProjectModel.find({}, {}, {}, function(err, data){
+		res.render('project_list', {
+			title: 'All Projects',
+			user: req.user,
+			list: data
+		});
+	});
+});
 app.get('/account', ensureAuthenticated, routes.account);
 
 app.get('/new_project', ensureAuthenticated, routes.new_project);
